@@ -1,0 +1,28 @@
+.highlight {
+  background-color: #8aebf1 !important;
+}
+
+.start {
+  background-color: #b6d53c !important;
+}
+
+.end {
+  background-color: #f4b41b !important;
+}
+
+.wall {
+  background-color: #302c2e !important;
+}
+
+.selected {
+  background-color: #8aebf1;
+}
+
+#selectedColorModeHighlite {
+  border: #000000 5px solid !important;
+}
+
+.min50 {
+  height: 50px;
+  width: 50px !important;
+}
