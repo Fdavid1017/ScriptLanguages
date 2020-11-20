@@ -66,14 +66,12 @@ function select(element, x, y) {
 
   switch (currentColorMode) {
     case "start":
-      if (
-        startLocation[0] != undefined &&
-        startLocation[1] != undefined
-      ) {
+      if (startLocation[0] != undefined && startLocation[1] != undefined) {
         map[startLocation[0]][startLocation[1]] = "empty";
         removeAnyColorMode(
-          document.getElementById("gridTable").rows[startLocation[0]]
-            .cells[startLocation[1]]
+          document.getElementById("gridTable").rows[startLocation[0]].cells[
+            startLocation[1]
+          ]
         );
       }
 
@@ -102,7 +100,6 @@ function select(element, x, y) {
 function createTable(rows, columns) {
   var old = document.getElementById("gridTable");
   if (old) {
-    console.log("old table deleted");
     old.remove();
   }
 
@@ -153,4 +150,8 @@ function setSolorMode(mode, target) {
 
   currentColorMode = mode;
   target.id = "selectedColorModeHighlite";
+}
+
+function sendMap() {
+  console.log("map sent");
 }

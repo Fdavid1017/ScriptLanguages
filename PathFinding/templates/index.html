@@ -1,3 +1,5 @@
+{%  load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Table test</title>
 
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="{%  static 'css/style.css'%}" />
 
     <!--Bootstrap-->
     <link
@@ -24,20 +26,41 @@
       integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
       crossorigin="anonymous"
     ></script>
-    <script src="./functions.js"></script>
+    <script src="{%  static 'js/functions.js'%}"></script>
   </head>
-  <body onmousedown="mouseDown()" onmouseup="mouseUp()" onload="startUp()">
+  <body class="p-5" onmousedown="mouseDown()" onmouseup="mouseUp()" onload="startUp()">
     <div class="mt-5 row d-flex justify-content-center">
       <div class="col text-center">
-        <div>
-          <label for="tableRowsSize">Rows: </label>
-          <input type="number" id="tableRowsSize" min="1" />
+        <div class="row d-flex justify-content-center">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Rows:</span>
+            </div>
+            <input
+              type="number"
+              class="form-control"
+              id="tableRowsSize"
+              aria-describedby="basic-addon3"
+              min="1"
+            />
+          </div>
         </div>
-        <div>
-          <label for="tableColumnsSize">Columns: </label>
-          <input type="number" id="tableColumnsSize" min="1" />
+        <div class="row d-flex justify-content-center">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Columns:</span>
+            </div>
+            <input
+              type="number"
+              class="form-control"
+              id="tableColumnsSize"
+              aria-describedby="basic-addon3"
+              min="1"
+            />
+          </div>
         </div>
         <button
+          class="btn btn-outline-primary"
           onclick="{createTable(parseInt(document.getElementById('tableRowsSize').value), parseInt(document.getElementById('tableColumnsSize').value)); 
           map = GenerateMap(startSize, startSize);}"
         >
@@ -81,6 +104,13 @@
         id="generatedTablePlace"
         class="col-md-6 d-flex justify-content-center text-center"
       ></div>
+    </div>
+    <div class="mt-5 row d-flex justify-content-center">
+      <div class="col-md-6 d-flex justify-content-center text-center">
+        <button class="btn btn-outline-primary" onclick="sendMap()">
+          Send map
+        </button>
+      </div>
     </div>
   </body>
 </html>
