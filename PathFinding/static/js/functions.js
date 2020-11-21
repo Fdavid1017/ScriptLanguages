@@ -51,6 +51,7 @@ function removeAnyColorMode(element) {
     colorModes.forEach((current) => {
         if (element.classList.contains(current)) {
             removeClass(element, current);
+            addClass(element, "empty")
         }
     });
 }
@@ -107,6 +108,7 @@ function createTable(rows, columns) {
 
     var table = document.createElement("table");
     table.id = "gridTable";
+    addClass(table, "spacedTable-10");
 
     for (let row = 0; row < rows; row++) {
         var tr = document.createElement("tr");
@@ -114,7 +116,7 @@ function createTable(rows, columns) {
         for (let col = 0; col < columns; col++) {
             var td = document.createElement("td");
             addClass(td, "min50");
-            addClass(td, "border");
+            addClass(td, "empty");
 
             td.addEventListener("mouseenter", function (event) {
                 addClass(event.target, "highlight");
@@ -177,7 +179,8 @@ function sendMap() {
                     data.push(obj);
                 }
             );
-            console.log(data);
+            console.log(response.data.executeTime);
+            document.getElementById("executeTimeDisplay").innerHTML = (response.data.executeTime.toFixed(7) + " sec");
             processResponse(data);
         }
     });
@@ -206,7 +209,6 @@ async function processResponse(responsePath) {
     var table = document.getElementById("gridTable")
     if (!table) return;
 
-    console.log(startLocation)
     for (var i = 0; i < responsePath.length; i++) {
         if (!(responsePath[i].x == startLocation[0] && responsePath[i].y == startLocation[1]) &&
             !(responsePath[i].x == endLocation[0] && responsePath[i].y == endLocation[1])) {
@@ -217,5 +219,5 @@ async function processResponse(responsePath) {
 }
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

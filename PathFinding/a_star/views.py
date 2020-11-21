@@ -1,3 +1,5 @@
+import time
+import timeit
 from json import dumps
 
 from django.http import JsonResponse, HttpResponse
@@ -11,6 +13,7 @@ def index(request):
     context = {}
 
     if request.method == "POST":
+        startTime = time.perf_counter()
         map = []
 
         for key in request.POST.keys():
@@ -27,7 +30,12 @@ def index(request):
         for a in route:
             jsonString.append(NodeEncoder().encode(a))
 
+        stopTime = time.perf_counter()
+
+        elapsed = stopTime - startTime
+
         context['route'] = jsonString
+        context['executeTime'] = elapsed
 
         # return JsonResponse(dumps(context), safe=False, status=400)
         # return render(request, "index.html")
