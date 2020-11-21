@@ -7,6 +7,7 @@ var map = GenerateMap(startSize, startSize);
 var startLocation = [undefined, undefined];
 var endLocation = [undefined, undefined];
 var csrftoken = getCookie('csrftoken');
+var previousMapSize = [2, 2];
 
 
 //Start up
@@ -134,6 +135,10 @@ function createTable(rows, columns) {
         table.appendChild(tr);
     }
     GenerateMap(rows, columns)
+    document.getElementById("executeTimeDisplay").innerHTML = "";
+    previousMapSize[0] = rows;
+    previousMapSize[1] = columns;
+
     document.getElementById("generatedTablePlace").appendChild(table);
 }
 
@@ -213,11 +218,19 @@ async function processResponse(responsePath) {
         if (!(responsePath[i].x == startLocation[0] && responsePath[i].y == startLocation[1]) &&
             !(responsePath[i].x == endLocation[0] && responsePath[i].y == endLocation[1])) {
             addClass(table.rows[responsePath[i].x].cells[responsePath[i].y], "path");
-            await sleep(250)
+            await sleep(getSpeedRange())
         }
     }
 }
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function clearMap() {
+    createTable(previousMapSize[0], previousMapSize[1]);
+}
+
+function getSpeedRange() {
+    return Math.abs(document.getElementById("speedRange").value);
 }
