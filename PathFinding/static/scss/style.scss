@@ -1100,26 +1100,33 @@ section {
 
 .start {
   background-color: #badc58;
+  font-size: 0.85em;
 }
 
 .end {
   background-color: #f0932b;
+  font-size: 0.85em;
 }
 
 .wall {
   background-color: #535c68;
+  color: $grey-1;
+  font-size: 0.85em;
 }
 
 .selected {
   background-color: #8aebf1;
+  font-size: 0.85em;
 }
 
 .path {
   background-color: #eb4d4b !important;
+  font-size: 0.85em;
 }
 
 .empty {
   background-color: $grey-2;
+  font-size: 0.85em;
 }
 
 #selectedColorModeHighlite {

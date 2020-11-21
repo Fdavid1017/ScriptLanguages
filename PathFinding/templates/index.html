@@ -6,6 +6,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>A*</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
 
@@ -72,25 +73,29 @@
                             onclick="setSolorMode('start',this)"
                             title="Start"
                             id="selectedColorModeHighlite"
-                    ></td>
+                    >Start
+                    </td>
                     <td
                             class="min50 end"
                             {#                            style="background-color: #f4b41b"#}
                             onclick="setSolorMode('end',this)"
                             title="Finish"
-                    ></td>
+                    >Finish
+                    </td>
                     <td
                             class="min50 wall"
                             {#                            style="background-color: #302c2e"#}
                             onclick="setSolorMode('wall',this)"
                             title="Wall"
-                    ></td>
+                    >Wall
+                    </td>
                     <td
                             class="min50 empty"
                             {#                            style="background-color: #ffffff"#}
                             onclick="setSolorMode('empty',this)"
                             title="Empty"
-                    ></td>
+                    >Empty
+                    </td>
                 </tr>
             </table>
         </div>

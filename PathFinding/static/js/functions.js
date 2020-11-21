@@ -64,7 +64,7 @@ function select(element, x, y) {
         }
     });
 
-    if (currentColorMode != "empty") addClass(element, currentColorMode);
+    addClass(element, currentColorMode);
 
     map[x][y] = currentColorMode;
 
