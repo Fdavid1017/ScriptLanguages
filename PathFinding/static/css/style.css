@@ -18,6 +18,10 @@
   background-color: #8aebf1;
 }
 
+.path{
+   background-color: #a93b3b !important;
+}
+
 #selectedColorModeHighlite {
   border: #000000 5px solid !important;
 }

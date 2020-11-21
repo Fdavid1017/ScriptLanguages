@@ -1,4 +1,4 @@
-const colorModes = ["start", "end", "wall", "empty"];
+const colorModes = ["start", "end", "wall", "empty", "path"];
 const startSize = 5;
 
 var mouseButtonPos = 0;
@@ -6,6 +6,8 @@ var currentColorMode = "start";
 var map = GenerateMap(startSize, startSize);
 var startLocation = [undefined, undefined];
 var endLocation = [undefined, undefined];
+var csrftoken = getCookie('csrftoken');
+
 
 //Start up
 function startUp() {
@@ -129,7 +131,7 @@ function createTable(rows, columns) {
         }
         table.appendChild(tr);
     }
-
+    GenerateMap(rows, columns)
     document.getElementById("generatedTablePlace").appendChild(table);
 }
 
@@ -176,6 +178,7 @@ function sendMap() {
                 }
             );
             console.log(data);
+            processResponse(data);
         }
     });
 
@@ -199,6 +202,20 @@ function getCookie(name) {
     return cookieValue;
 }
 
-var csrftoken = getCookie('csrftoken');
+async function processResponse(responsePath) {
+    var table = document.getElementById("gridTable")
+    if (!table) return;
 
+    console.log(startLocation)
+    for (var i = 0; i < responsePath.length; i++) {
+        if (!(responsePath[i].x == startLocation[0] && responsePath[i].y == startLocation[1]) &&
+            !(responsePath[i].x == endLocation[0] && responsePath[i].y == endLocation[1])) {
+            addClass(table.rows[responsePath[i].x].cells[responsePath[i].y], "path");
+            await sleep(250)
+        }
+    }
+}
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
