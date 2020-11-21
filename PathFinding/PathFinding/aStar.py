@@ -1,37 +1,7 @@
 from json import JSONEncoder
 
 
-# class Vector2:
-#     def __init__(self, x, y):
-#         self.x = x
-#         self.y = y
-#
-#     def __str__(self):
-#         return "X: " + str(self.x) + " Y: " + str(self.y)
-#
-#     def __eq__(self, other):
-#         return self.x == other.x and self.y == other.y
-#
-#
-# class Vector2Encoder(JSONEncoder):
-#     def default(self, object):
-#         if isinstance(object, Vector2):
-#             return object.__dict__
-#         else:
-#             # call base class implementation which takes care of
-#             # raising exceptions for unsupported types
-#             return JSONEncoder.default(self, object)
-
-
 class Node:
-
-    # def __init__(self, pos: Vector2):
-    #     self.g = 0
-    #     self.h = 0
-    #     self.f = 0
-    #     self.pos = pos
-    #     self.parent = None
-
     def __init__(self, x, y):
         self.g = 0
         self.h = 0
@@ -56,8 +26,6 @@ class NodeEncoder(JSONEncoder):
         if isinstance(object, Node):
             return object.__dict__
         else:
-            # call base class implementation which takes care of
-            # raising exceptions for unsupported types
             return JSONEncoder.default(self, object)
 
 
@@ -85,6 +53,11 @@ def getWalkableNode(x, y, map):
     return list(filter(
         lambda current: map[current.x][current.y] == "empty" or map[current.x][current.y] == "end",
         proposedNodes))
+    # TODO: sometimes this throws an "
+    #  line 54, in <lambda>
+    #  lambda current: map[current.x][current.y] == "empty" or map[current.x][current.y] == "end",
+    #  IndexError: list index out of range"
+    #  error
 
 
 def calculateRoute(map, start, target):
@@ -151,6 +124,8 @@ def mapRouteToList(map):
 
     if not (current.x == target.x and current.y == target.y):
         return "No path found to the target!"
+
+    # TODO: thow expection instead of returning a text
 
     route = []
     while current is not None:

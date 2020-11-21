@@ -134,7 +134,9 @@ function createTable(rows, columns) {
         }
         table.appendChild(tr);
     }
-    GenerateMap(rows, columns)
+    map = GenerateMap(startSize, startSize);
+    startLocation = [undefined, undefined];
+    endLocation = [undefined, undefined];
     document.getElementById("executeTimeDisplay").innerHTML = "";
     previousMapSize[0] = rows;
     previousMapSize[1] = columns;
@@ -167,9 +169,7 @@ function sendMap() {
         'csrfmiddlewaretoken': csrftoken
     };
 
-    // $.post('', postdata, function (response) {
-    //     console.log(response.value);
-    // });
+    // TODO: dont allow to send request if start or finish is not defined
 
     $.ajax({
         type: 'POST',
