@@ -165,13 +165,21 @@ function sendMap() {
     $.ajax({
         type: 'POST',
         url: "",
+        dataType: "json",
         data: postdata,
         success: function (response) {
-            console.log(response['data']);
+            var data = []
+            response.data.route.forEach(
+                element => {
+                    var obj = JSON.parse(element);
+                    data.push(obj);
+                }
+            );
+            console.log(data);
         }
     });
 
-    console.log(map)
+    //console.log(map)
     console.log("map sent");
 }
 

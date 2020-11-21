@@ -1,16 +1,14 @@
 from json import dumps
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from PathFinding.aStar import calculateRoute, Vector2, Node, mapRouteToList
+from PathFinding.aStar import calculateRoute, Node, mapRouteToList, NodeEncoder
 
 
 def index(request):
     context = {}
-    context["test"] = 'temp'
-    context["test1"] = 'temp1'
 
     if request.method == "POST":
         map = []
@@ -22,12 +20,22 @@ def index(request):
 
         print("\n\nRoute:")
         for t in route:
-            print(t.pos.__str__())
+            print(t)
 
-        #context['route'] = route
+        jsonString = []
+
+        for a in route:
+            jsonString.append(NodeEncoder().encode(a))
+
+        context['route'] = jsonString
 
         # return JsonResponse(dumps(context), safe=False, status=400)
-    return render(request, "index.html", {'data': dumps(context)})
+        # return render(request, "index.html")
+
+        return HttpResponse(dumps({'data': context}), content_type="application/json")
+
+    else:
+        return render(request, 'index.html')
 
 # def a_star_calculate(request):
 #     map = []
