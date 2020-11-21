@@ -1,0 +1,73 @@
+/* === COLOURS & VARIABLES === */
+$primary: #ff7025;
+$primary-light: #f8b639;
+$primary-dark: #ff4c00;
+
+$white: #fff;
+$grey-1: #e0e5ec;
+$grey-2: #c3c1c6;
+$grey-3: #b1b1b1;
+$grey-5: #9baacf;
+$grey-fade-1: fade_out($grey-1, 0.1);
+$grey-fade-2: fade_out($grey-2, 0.1);
+
+$background: $grey-1;
+$standard-radius: 1.2rem;
+$standard-transition: 260ms;
+
+
+body {
+	background: $background;
+	color: $grey-5;
+	padding: 2rem;
+	font-family: "Baloo Thambi 2", cursive !important;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 1.2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+
+	@media screen and (min-width: 30em) {
+		font-size: 1.5rem;
+	}
+
+	> p {
+		margin: 0;
+	}
+}
+
+.highlight {
+  background-color: #8aebf1 !important;
+}
+
+.start {
+  background-color: #b6d53c !important;
+}
+
+.end {
+  background-color: #f4b41b !important;
+}
+
+.wall {
+  background-color: #302c2e !important;
+}
+
+.selected {
+  background-color: #8aebf1;
+}
+
+.path{
+   background-color: #a93b3b !important;
+}
+
+#selectedColorModeHighlite {
+  border: #000000 5px solid !important;
+}
+
+.min50 {
+  height: 50px;
+  width: 50px !important;
+}

@@ -1,3 +1,27 @@
+/* === COLOURS & VARIABLES === */
+body {
+  background: #e0e5ec;
+  color: #9baacf;
+  padding: 2rem;
+  font-family: "Baloo Thambi 2", cursive !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+@media screen and (min-width: 30em) {
+  body {
+    font-size: 1.5rem;
+  }
+}
+body > p {
+  margin: 0;
+}
+
 .highlight {
   background-color: #8aebf1 !important;
 }
@@ -18,8 +42,8 @@
   background-color: #8aebf1;
 }
 
-.path{
-   background-color: #a93b3b !important;
+.path {
+  background-color: #a93b3b !important;
 }
 
 #selectedColorModeHighlite {
@@ -30,3 +54,5 @@
   height: 50px;
   width: 50px !important;
 }
+
+/*# sourceMappingURL=style.css.map */
