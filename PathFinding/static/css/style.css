@@ -946,6 +946,10 @@ section > div {
   background-color: #7ed6df;
 }
 
+.w-40 {
+  width: 35%;
+}
+
 .min50 {
   height: 50px;
   width: 50px !important;
@@ -994,6 +998,11 @@ section > div {
   max-width: 960px;
   padding-right: 10px;
   padding-left: 10px;
+}
+
+.spacedTable-2 {
+  border-spacing: 2px;
+  border-collapse: separate;
 }
 
 .spacedTable-5 {

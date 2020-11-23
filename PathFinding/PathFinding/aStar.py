@@ -3,8 +3,11 @@ from json import JSONEncoder
 
 class Node:
     def __init__(self, x, y):
+        #Distance from start
         self.g = 0
+        #Distance from end
         self.h = 0
+        #G+H
         self.f = 0
         self.x = x
         self.y = y

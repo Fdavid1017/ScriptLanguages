@@ -9,6 +9,11 @@ var endLocation = [undefined, undefined];
 var csrftoken = getCookie('csrftoken');
 var previousMapSize = [startSize, startSize];
 var closedList = [];
+var infosTemplate = {
+    "g": "Distance from start",
+    "h": "Distance from end",
+    "f": "G cost + H cost"
+}
 
 
 //Start up
@@ -136,24 +141,27 @@ function createTable(rows, columns) {
 
     var table = document.createElement("table");
     table.id = "gridTable";
-    addClass(table, "spacedTable-10");
+    addClass(table, "spacedTable-2");
+    addClass(table, "w-100");
 
+    const size = 100 / columns;
     for (let row = 0; row < rows; row++) {
         var tr = document.createElement("tr");
 
         for (let col = 0; col < columns; col++) {
             var td = document.createElement("td");
-            addClass(td, "min50");
+            //addClass(td, "min50");
             addClass(td, "empty");
-
-            // TODO: set them to the same square size
+            td.setAttribute("style", " width: " + size + "%; padding-bottom: " + size + "%;");
 
             td.addEventListener("mouseenter", function (event) {
                 addClass(event.target, "highlight");
                 CellDraw(event.target, row, col);
+                showInfosFrom(row, col);
             });
             td.addEventListener("mouseout", function (event) {
                 removeClass(event.target, "highlight");
+                hideInfos();
             });
             td.addEventListener("click", function (event) {
                 select(event.target, row, col);
@@ -171,6 +179,31 @@ function createTable(rows, columns) {
     previousMapSize[1] = columns;
 
     document.getElementById("generatedTablePlace").appendChild(table);
+}
+
+function showInfosFrom(x, y) {
+    var item = undefined;
+
+    for (var i = 0; i < closedList.length && item == undefined; i++) {
+        if (closedList[i].x == x && closedList[i].y == y) {
+            item = closedList[i];
+        }
+    }
+
+    if (item == undefined) {
+        hideInfos();
+    } else {
+        // TODO: G cost is always 0
+        document.getElementById("gCostText").innerHTML = item.g;
+        document.getElementById("hCostText").innerHTML = item.h;
+        document.getElementById("fCostText").innerHTML = item.f;
+    }
+}
+
+function hideInfos() {
+    document.getElementById("gCostText").innerHTML = infosTemplate.g;
+    document.getElementById("hCostText").innerHTML = infosTemplate.h;
+    document.getElementById("fCostText").innerHTML = infosTemplate.f;
 }
 
 function CellDraw(target, x, y) {

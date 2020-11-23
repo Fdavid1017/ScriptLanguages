@@ -1136,12 +1136,16 @@ section {
   font-size: 0.85em;
 }
 
-.checked{
+.checked {
   background-color: #7ed6df;
 }
 
 #selectedColorModeHighlite {
   @extend .highlight;
+}
+
+.w-40 {
+  width: 35%;
 }
 
 .min50 {
@@ -1189,11 +1193,14 @@ section {
 
 .wrapper {
   margin: auto;
-
   max-width: 960px;
-
   padding-right: 10px;
   padding-left: 10px;
+}
+
+.spacedTable-2 {
+  border-spacing: 2px;
+  border-collapse: separate;
 }
 
 .spacedTable-5 {

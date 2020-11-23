@@ -49,9 +49,6 @@ def index(request):
 
         context['closedList'] = closedJsonString
 
-        # TODO: return and add option to visualize data (fCost, gCost, hCost)
-        # TODO: return and add option to visualize checked tiles (closed list)
-
         return HttpResponse(dumps({'data': context}), content_type="application/json")
 
     else:
