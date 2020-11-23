@@ -100,7 +100,7 @@ def calculateRoute(map, start, target):
                 walkable.calculateFCost()
                 walkable.parent = current
 
-    return current
+    return current, closedList
 
 
 def mapRouteToList(map):
@@ -113,13 +113,14 @@ def mapRouteToList(map):
     if target is None:
         raise ValueError("End not found")
 
-    current = calculateRoute(map, start, target)
+    result = calculateRoute(map, start, target)
+    current = result[0]
     if current is None:
         raise RuntimeError("Something went wrong, no value returned")
 
     if not (current.x == target.x and current.y == target.y):
         # No route found to the destination
-        return None
+        return None, result[1]
 
     route = []
     while current is not None:
@@ -131,4 +132,4 @@ def mapRouteToList(map):
 
     route.reverse()
 
-    return route
+    return route, result[1]

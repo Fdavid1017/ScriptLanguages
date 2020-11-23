@@ -104,11 +104,25 @@
         </div>
     </div>
 </div>
+
 <div class="mt-5 shadow--outset text-center">
     <div class="card-body">
         <div id="generatedTablePlace"></div>
     </div>
     <div class="col w-100">
+        <div class="row w-100">
+            <div class="col small">
+                Show explored tiles
+            </div>
+            <div class="col">
+                <label class="switch">
+                    <span class="sr-only">Switch</span>
+                    <input id="showExploredTilesSwitch" onclick="showExploredTilesSwitchClicked(this)" class="switch__input" type="checkbox"/>
+                    <span class="switch__slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="horizontalDivider"></div>
         <div class="row w-100">
             <div class="col w-50">Execution time:</div>
             <div id="executeTimeDisplay" class="col w-50"></div>
@@ -116,6 +130,7 @@
     </div>
 </div>
 
+<!-- Speed control -->
 <div class="mt-1 w-50 text-center">
     <div class="row justify-content-md-center">
         <div class="wrapper">

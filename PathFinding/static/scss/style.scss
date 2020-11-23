@@ -1098,7 +1098,7 @@ section {
   border-radius: 0px !important;
 }
 
-.basicTile{
+.basicTile {
   @extend .shadow--inset;
   padding: 0px !important;
   border: none !important;
@@ -1136,6 +1136,10 @@ section {
   font-size: 0.85em;
 }
 
+.checked{
+  background-color: #7ed6df;
+}
+
 #selectedColorModeHighlite {
   @extend .highlight;
 }
@@ -1169,16 +1173,16 @@ section {
   transform: rotate(270deg);
 }
 
-.pathDirectionArrow{
+.pathDirectionArrow {
   pointer-events: none;
 }
 
-.horizontalMirror{
+.horizontalMirror {
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
 
-.verticalMirror{
+.verticalMirror {
   -webkit-transform: scaleY(-1);
   transform: scaleY(-1);
 }
@@ -1247,3 +1251,22 @@ section {
 #speedRange:hover::-webkit-slider-thumb {
   box-shadow: raised-shadow();
 }
+
+.horizontalDivider {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  @extend .shadow--sunken;
+  padding: 1px !important;
+  border-radius: 0px !important;
+}
+
+/*
+.shadow {
+  &--outset,
+  &--raised,
+  &--inset,
+  &--sunken,
+  &--ridge {
+*/

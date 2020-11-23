@@ -20,7 +20,8 @@ def index(request):
             if key != "csrfmiddlewaretoken":
                 map.append(request.POST.getlist(key))
 
-        route = mapRouteToList(map)
+        result = mapRouteToList(map)
+        route = result[0]
 
         if route is None:
             context['error'] = "No route found to the destination!"
@@ -41,6 +42,12 @@ def index(request):
         elapsed = stopTime - startTime
 
         context['executeTime'] = elapsed
+
+        closedJsonString = []
+        for t in result[1]:
+            closedJsonString.append(NodeEncoder().encode(t))
+
+        context['closedList'] = closedJsonString
 
         # TODO: return and add option to visualize data (fCost, gCost, hCost)
         # TODO: return and add option to visualize checked tiles (closed list)

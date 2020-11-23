@@ -1,4 +1,4 @@
-const colorModes = ["start", "end", "wall", "empty", "path"];
+const colorModes = ["start", "end", "wall", "empty", "path", "checked"];
 const startSize = 5;
 
 var mouseButtonPos = 0;
@@ -8,6 +8,7 @@ var startLocation = [undefined, undefined];
 var endLocation = [undefined, undefined];
 var csrftoken = getCookie('csrftoken');
 var previousMapSize = [startSize, startSize];
+var closedList = [];
 
 
 //Start up
@@ -217,8 +218,10 @@ function sendMap() {
     for (var x = 0; x < map.length; x++) {
         for (var y = 0; y < map[x].length; y++) {
             removeClass(table.rows[x].cells[y], "path");
+            removeClass(table.rows[x].cells[y], "checked");
         }
     }
+    closedList = []
 
     $.ajax({
         type: 'POST',
@@ -228,24 +231,35 @@ function sendMap() {
         success: function (response) {
             document.getElementById("executeTimeDisplay").innerHTML = (response.data.executeTime.toFixed(7) + " sec");
 
+            var closedData = [];
+            response.data.closedList.forEach(
+                element => {
+                    var obj = JSON.parse(element);
+                    closedData.push(obj);
+                }
+            );
+            closedList = closedData;
+            if (document.getElementById("showExploredTilesSwitch").checked) {
+                console.log("check")
+                RevealCheckedCells(table)
+            }
+
             if (response.data.error) {
                 showModal(response.data.error)
                 return;
             }
 
-            var data = []
+            var data = [];
             response.data.route.forEach(
                 element => {
                     var obj = JSON.parse(element);
                     data.push(obj);
                 }
             );
+
             processResponse(data);
         }
     });
-
-    console.log("map sent:");
-    console.log(map)
 }
 
 function showModal(text) {
@@ -275,10 +289,11 @@ async function processResponse(responsePath) {
     if (!table) return;
 
     var previousRotation = 0;
-    // TODO: show arrows pointing to the next tile
+
     for (var i = 0; i < responsePath.length; i++) {
         var cell = table.rows[responsePath[i].x].cells[responsePath[i].y];
 
+        // show arrows pointing to the next tile
         if (i == 0) {
             previousRotation = getRotationToNextCell(responsePath[i].x, responsePath[i].y, responsePath[i + 1].x, responsePath[i + 1].y);
         }
@@ -351,4 +366,35 @@ function clearMap() {
 
 function getSpeedRange() {
     return Math.abs(document.getElementById("speedRange").value);
+}
+
+function showExploredTilesSwitchClicked(cb) {
+    var table = document.getElementById("gridTable");
+    if (cb.checked) {
+        RevealCheckedCells(table)
+    } else {
+        var checkedList = document.querySelectorAll(".checked");
+        checkedList.forEach(cell => {
+            //var cell = table.rows[node.x].cells[node.y];
+            removeClass(cell, "checked");
+        });
+    }
+}
+
+async function RevealCheckedCells(table) {
+    for (const node of closedList) {
+        var cell = table.rows[node.x].cells[node.y];
+        if (
+            //"start", "end", "wall", "empty", "path", "checked"
+            cell.classList.contains("start") ||
+            cell.classList.contains("end") ||
+            cell.classList.contains("wall") ||
+            cell.classList.contains("path") ||
+            cell.classList.contains("checked")
+        ) {
+            continue;
+        }
+        addClass(cell, "checked");
+        await sleep(getSpeedRange())
+    }
 }
