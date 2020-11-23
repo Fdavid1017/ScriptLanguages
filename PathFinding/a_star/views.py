@@ -17,28 +17,33 @@ def index(request):
         map = []
 
         for key in request.POST.keys():
-            map.append(request.POST.getlist(key))
+            if key != "csrfmiddlewaretoken":
+                map.append(request.POST.getlist(key))
 
         route = mapRouteToList(map)
 
-        print("\n\nRoute:")
-        for t in route:
-            print(t)
+        if route is None:
+            context['error'] = "No route found to the destination!"
 
-        jsonString = []
+        else:
+            print("\n\nRoute:")
+            for t in route:
+                print(t)
 
-        for a in route:
-            jsonString.append(NodeEncoder().encode(a))
+            jsonString = []
+
+            for a in route:
+                jsonString.append(NodeEncoder().encode(a))
+
+            context['route'] = jsonString
 
         stopTime = time.perf_counter()
-
         elapsed = stopTime - startTime
 
-        context['route'] = jsonString
         context['executeTime'] = elapsed
 
-        # return JsonResponse(dumps(context), safe=False, status=400)
-        # return render(request, "index.html")
+        # TODO: return and add option to visualize data (fCost, gCost, hCost)
+        # TODO: return and add option to visualize checked tiles (closed list)
 
         return HttpResponse(dumps({'data': context}), content_type="application/json")
 

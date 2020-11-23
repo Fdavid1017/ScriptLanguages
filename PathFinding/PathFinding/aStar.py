@@ -53,11 +53,6 @@ def getWalkableNode(x, y, map):
     return list(filter(
         lambda current: map[current.x][current.y] == "empty" or map[current.x][current.y] == "end",
         proposedNodes))
-    # TODO: sometimes this throws an "
-    #  line 54, in <lambda>
-    #  lambda current: map[current.x][current.y] == "empty" or map[current.x][current.y] == "end",
-    #  IndexError: list index out of range"
-    #  error
 
 
 def calculateRoute(map, start, target):
@@ -120,12 +115,11 @@ def mapRouteToList(map):
 
     current = calculateRoute(map, start, target)
     if current is None:
-        return "Something went wrong! :("
+        raise RuntimeError("Something went wrong, no value returned")
 
     if not (current.x == target.x and current.y == target.y):
-        return "No path found to the target!"
-
-    # TODO: thow expection instead of returning a text
+        # No route found to the destination
+        return None
 
     route = []
     while current is not None:
