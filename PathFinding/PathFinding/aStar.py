@@ -3,11 +3,11 @@ from json import JSONEncoder
 
 class Node:
     def __init__(self, x, y):
-        #Distance from start
+        # Distance from start
         self.g = 0
-        #Distance from end
+        # Distance from end
         self.h = 0
-        #G+H
+        # G+H
         self.f = 0
         self.x = x
         self.y = y
@@ -41,7 +41,7 @@ def findNodeWithName(map, name: str):
     return None
 
 
-def getWalkableNode(x, y, map):
+def getWalkableNode(x, y, map, allowDiagonal):
     proposedNodes = []
 
     if y - 1 >= 0:
@@ -53,12 +53,22 @@ def getWalkableNode(x, y, map):
     if x + 1 < len(map):
         proposedNodes.append(Node(x + 1, y))
 
+    if allowDiagonal == "true":
+        if y - 1 >= 0 and x - 1 >= 0:
+            proposedNodes.append(Node(x - 1, y - 1))
+        if y + 1 < len(map[0]) and x + 1 < len(map):
+            proposedNodes.append(Node(x + 1, y + 1))
+        if x - 1 >= 0 and y + 1 < len(map[0]):
+            proposedNodes.append(Node(x - 1, y + 1))
+        if x + 1 < len(map) and y - 1 >= 0:
+            proposedNodes.append(Node(x + 1, y - 1))
+
     return list(filter(
         lambda current: map[current.x][current.y] == "empty" or map[current.x][current.y] == "end",
         proposedNodes))
 
 
-def calculateRoute(map, start, target):
+def calculateRoute(map, start, target, allowDiagonal):
     current = None
     openList = []
     closedList = []
@@ -71,6 +81,7 @@ def calculateRoute(map, start, target):
         current = next(val for val in openList if val.f == lowest)
 
         # add the current Node to the closed list and remove it from the current
+        current.g = g
         closedList.append(current)
 
         openList.remove(current)
@@ -79,8 +90,8 @@ def calculateRoute(map, start, target):
         if next((val for val in closedList if val.x == target.x and val.y == target.y), None) is not None:
             break
 
-        walkableNodes = getWalkableNode(current.x, current.y, map);
-        ++g
+        walkableNodes = getWalkableNode(current.x, current.y, map, allowDiagonal);
+        g = g + 1
 
         for walkable in walkableNodes:
             # if this walkable square is already in the closed list, ignore it
@@ -106,7 +117,7 @@ def calculateRoute(map, start, target):
     return current, closedList
 
 
-def mapRouteToList(map):
+def mapRouteToList(map, allowDiagonal):
     start = findNodeWithName(map, 'start')
     target = findNodeWithName(map, 'end')
 
@@ -116,7 +127,7 @@ def mapRouteToList(map):
     if target is None:
         raise ValueError("End not found")
 
-    result = calculateRoute(map, start, target)
+    result = calculateRoute(map, start, target, allowDiagonal)
     current = result[0]
     if current is None:
         raise RuntimeError("Something went wrong, no value returned")

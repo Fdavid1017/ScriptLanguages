@@ -193,7 +193,6 @@ function showInfosFrom(x, y) {
     if (item == undefined) {
         hideInfos();
     } else {
-        // TODO: G cost is always 0
         document.getElementById("gCostText").innerHTML = item.g;
         document.getElementById("hCostText").innerHTML = item.h;
         document.getElementById("fCostText").innerHTML = item.f;
@@ -232,6 +231,7 @@ function setColorMode(mode, target) {
 function sendMap() {
     var postdata = {
         'map': map,
+        'diagonalMoves': document.getElementById("allowDiagonalMoveSwitch").checked,
         'csrfmiddlewaretoken': csrftoken
     };
 
@@ -276,6 +276,7 @@ function sendMap() {
                 console.log("check")
                 RevealCheckedCells(table)
             }
+            document.getElementById("exploredCellsDisplay").innerHTML = (closedList.length - 2).toString();
 
             if (response.data.error) {
                 showModal(response.data.error)
@@ -290,6 +291,8 @@ function sendMap() {
                 }
             );
 
+
+            document.getElementById("pathLengthDisplay").innerHTML = (data.length - 2).toString();
             processResponse(data);
         }
     });
@@ -325,53 +328,6 @@ async function processResponse(responsePath) {
 
     for (var i = 0; i < responsePath.length; i++) {
         var cell = table.rows[responsePath[i].x].cells[responsePath[i].y];
-
-        // show arrows pointing to the next tile
-        if (i == 0) {
-            previousRotation = getRotationToNextCell(responsePath[i].x, responsePath[i].y, responsePath[i + 1].x, responsePath[i + 1].y);
-        }
-
-        if (i < responsePath.length - 1 && i > 0) {
-            var img = document.createElement("IMG");
-            img.setAttribute("width", cell.getAttribute("width"))
-            img.setAttribute("height", cell.getAttribute("height"))
-            addClass(img, "pathDirectionArrow")
-
-            var rotation = getRotationToNextCell(responsePath[i].x, responsePath[i].y, responsePath[i + 1].x, responsePath[i + 1].y)
-            var iconName = "arrow-up.svg"
-            if (previousRotation != rotation) {
-                switch (previousRotation) {
-                    case 0:
-                        if (rotation == 90) iconName = "arrow-90deg-right.svg";
-                        else iconName = "arrow-90deg-left.svg";
-                        break;
-                    case 90:
-                        if (rotation == 0) iconName = "arrow-90deg-up.svg";
-                        else iconName = "arrow-90deg-down.svg";
-                        addClass(img, "horizontalMirror")
-                        break;
-                    case 180:
-                        if (rotation == 90) iconName = "arrow-90deg-right.svg";
-                        else iconName = "arrow-90deg-left.svg";
-                        addClass(img, "verticalMirror")
-                        break;
-                    case 270:
-                        if (rotation == 0) iconName = "arrow-90deg-up.svg";
-                        else iconName = "arrow-90deg-down.svg";
-                        break;
-                }
-                previousRotation = rotation;
-                rotation = 0;
-            } else {
-                previousRotation = rotation;
-            }
-
-            img.setAttribute("src", ICONS_URL + iconName)
-
-            if (rotation != 0) addClass(img, "rotate" + rotation)
-
-            cell.appendChild(img);
-        }
 
         if (!(responsePath[i].x == startLocation[0] && responsePath[i].y == startLocation[1]) &&
             !(responsePath[i].x == endLocation[0] && responsePath[i].y == endLocation[1])) {

@@ -17,10 +17,11 @@ def index(request):
         map = []
 
         for key in request.POST.keys():
-            if key != "csrfmiddlewaretoken":
+            if key != "csrfmiddlewaretoken" and key != "diagonalMoves":
                 map.append(request.POST.getlist(key))
 
-        result = mapRouteToList(map)
+
+        result = mapRouteToList(map,request.POST.get("diagonalMoves"))
         route = result[0]
 
         if route is None:
