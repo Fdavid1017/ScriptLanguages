@@ -114,7 +114,47 @@
 
 <div class="container-fluid">
     <div class="row ">
-        <div class="col text-center"></div>
+        <div class="col pr-5">
+            <button class="button button--round w-50" onclick="navControl()">
+                <svg viewBox="0 0 16 16" class="bi bi-info w-100 h-100" fill="currentColor"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"></path>
+                    <circle cx="8" cy="4.5" r="1"></circle>
+                </svg>
+                <span class="sr-only">Round</span>
+            </button>
+            <div id="mySidenav" class="sidenav mt-4">
+                <div>
+                    <p>
+                        A* is a graph traversal and path search algorithm, which is often used in many
+                        fields of computer science due to its completeness, optimality, and optimal efficiency.
+                    </p>
+                    <p>
+                        Starting from a specific starting node of a graph, it aims to find a path to the given goal node
+                        having the smallest cost.
+                        At each iteration of its main loop, A* needs to determine which of its paths to extend. It does
+                        so based on the cost of the path and an estimate of the cost required to extend the path all the
+                        way to the goal. Specifically, A* selects the path that minimizes f(n) = g(n) + h(n) where n is
+                        the next node on the path, g(n) is the cost of the path from the start node to n, and h(n) is a
+                        heuristic function that estimates the cost of the cheapest path from n to the goal.
+                    </p>
+                    <p>
+                    <h3>
+                        Sources:
+                    </h3>
+                    <ul>
+                        <li>
+                            <a href="https://en.wikipedia.org/wiki/A*_search_algorithm">https://en.wikipedia.org/wiki/A*_search_algorithm</a>
+                        </li>
+                        <li>
+                            Code based on: <a
+                                href="https://gigi.nullneuron.net/gigilabs/a-pathfinding-example-in-c/</a>">https://gigi.nullneuron.net/gigilabs/a-pathfinding-example-in-c/</a>
+                        </li>
+                    </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
         <div class="col p-0 m-0 text-center">
             <!-- Table -->
             <div class="mt-5 shadow--outset text-center">
