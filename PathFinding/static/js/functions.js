@@ -175,6 +175,8 @@ function createTable(rows, columns) {
     startLocation = [undefined, undefined];
     endLocation = [undefined, undefined];
     document.getElementById("executeTimeDisplay").innerHTML = "";
+    document.getElementById("pathLengthDisplay").innerHTML = "";
+    document.getElementById("exploredCellsDisplay").innerHTML = "";
     previousMapSize[0] = rows;
     previousMapSize[1] = columns;
 

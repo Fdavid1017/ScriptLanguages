@@ -81,7 +81,7 @@ def calculateRoute(map, start, target, allowDiagonal):
         current = next(val for val in openList if val.f == lowest)
 
         # add the current Node to the closed list and remove it from the current
-        current.g = g
+        # current.g = g
         closedList.append(current)
 
         openList.remove(current)
