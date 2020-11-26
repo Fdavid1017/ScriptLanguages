@@ -1,4 +1,5 @@
 {% load static %}
+{% csrf_token %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
 
     <script>
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         const ICONS_URL = "{% static 'icons/' %}";
     </script>
 

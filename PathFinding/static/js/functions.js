@@ -1,12 +1,12 @@
 const colorModes = ["start", "end", "wall", "empty", "path", "checked"];
 const startSize = 5;
+//const csrftoken = getCookie('csrftoken');
 
 var mouseButtonPos = 0;
 var currentColorMode = "start";
 var map = [];
 var startLocation = [undefined, undefined];
 var endLocation = [undefined, undefined];
-var csrftoken = getCookie('csrftoken');
 var previousMapSize = [startSize, startSize];
 var closedList = [];
 var infosTemplate = {
