@@ -1117,6 +1117,11 @@ section {
   font-size: 0.85em;
 }
 
+.backgroundHighlite {
+  background-color: $primary !important;
+  color: $grey-1 !important;
+}
+
 .wall {
   background-color: #535c68;
   color: $grey-1;
@@ -1139,7 +1144,7 @@ section {
 }
 
 .checked {
-  background-color: #7ed6df;
+  background-color: #22a6b3;
 }
 
 #selectedColorModeHighlite {
@@ -1325,3 +1330,6 @@ section {
   }
 }
 
+.cursorPointer {
+  cursor: pointer !important;
+}

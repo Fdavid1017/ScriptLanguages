@@ -922,6 +922,11 @@ section > div {
   font-size: 0.85em;
 }
 
+.backgroundHighlite {
+  background-color: #ff7025 !important;
+  color: #e0e5ec !important;
+}
+
 .wall {
   background-color: #535c68;
   color: #e0e5ec;
@@ -944,7 +949,7 @@ section > div {
 }
 
 .checked {
-  background-color: #7ed6df;
+  background-color: #22a6b3;
 }
 
 .w-40 {
@@ -1118,6 +1123,9 @@ section > div {
   .sidenav a {
     font-size: 18px;
   }
+}
+.cursorPointer {
+  cursor: pointer !important;
 }
 
 /*# sourceMappingURL=style.css.map */

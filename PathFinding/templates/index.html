@@ -37,7 +37,31 @@
                 Hi!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tutorial Modal -->
+<div class="modal fade" id="tutorialModal" tabindex="-1" role="dialog" aria-labelledby="tutorialModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="p-0 m-0">Usage:</p>
+                <p class="p-0 pt-2 m-0">1)</p>
+                <p class="p-0 m-0">Use the left side panel to generate a new map in any size between 2x2 and 30x30.
+                    <img width="250px" src="{% static 'images/inputsImg.png' %}"></p>
+                <p class="p-0 pt-2 m-0">2)</p>
+                <p class="p-0 m-0">Select what you want to place using the panel to the left and place them on the
+                    map using click or click and drag.
+                    <img width="250px" src="{% static 'images/placeElementTabImg.png' %}"></p>
+                <p class="p-0 pt-2 m-0">3)</p>
+                <p class="p-0 m-0">Generate the path using the button on the bottom.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -53,7 +77,8 @@
                 <span class="sr-only">Rows:</span>
                 <div>
                     <img class="textfield__icon" src="{% static 'icons/arrows-expand.svg' %}">
-                    <input id="tableRowsSize" type="number" min="2" max="50" value="5" placeholder="Rows..."/>
+                    <input id="tableRowsSize" onchange="inputNumberRangeCheck('#tableRowsSize',2,30)" type="number"
+                           min="2" max="30" value="5" placeholder="Rows..."/>
                 </div>
             </label>
         </div>
@@ -62,13 +87,14 @@
                 <span class="sr-only">Columns::</span>
                 <div>
                     <img class="textfield__icon rotate90" src="{% static 'icons/arrows-expand.svg' %}">
-                    <input id="tableColumnsSize" type="number" min="2" max="50" value="5" placeholder="Columns..."/>
+                    <input id="tableColumnsSize" onchange="inputNumberRangeCheck('#tableColumnsSize',2,30)"
+                           type="number"
+                           min="2" max="30" value="5" placeholder="Columns..."/>
                 </div>
             </label>
         </div>
         <button class="button mt-4"
-                onclick="{createTable(parseInt(document.getElementById('tableRowsSize').value), parseInt(document.getElementById('tableColumnsSize').value));}"
-        >
+                onclick="{createTable(parseInt(document.getElementById('tableRowsSize').value), parseInt(document.getElementById('tableColumnsSize').value));}">
             Generate
         </button>
     </div>
@@ -78,26 +104,26 @@
                 <table class="spacedTable-10">
                     <tr>
                         <td
-                                class="min50 start"
+                                class="min50 start cursorPointer"
                                 onclick="setColorMode('start',this)"
                                 title="Start"
                                 id="selectedColorModeHighlite"
                         >Start
                         </td>
                         <td
-                                class="min50 end basicTile"
+                                class="min50 end basicTile cursorPointer"
                                 onclick="setColorMode('end',this)"
                                 title="Finish"
                         >Finish
                         </td>
                         <td
-                                class="min50 wall basicTile"
+                                class="min50 wall basicTile cursorPointer"
                                 onclick="setColorMode('wall',this)"
                                 title="Wall"
                         >Wall
                         </td>
                         <td
-                                class="min50 empty basicTile"
+                                class="min50 empty basicTile cursorPointer"
                                 onclick="setColorMode('empty',this)"
                                 title="Empty"
                         >Empty
@@ -105,10 +131,12 @@
                     </tr>
                 </table>
                 <div class="horizontalDivider"></div>
-                <p class="text-muted" style="font-size: medium">The path is marked with <span
-                        style="color: #eb4d4b">red</span> cells</p>
-                <p class="text-muted" style="font-size: medium">The explored cells are marked with <span
-                        style="color: #7ed6df">blue</span></p>
+                <p class="text-muted" style="font-size: medium">The path is marked with <u
+                        style="color: #eb4d4b">red</u> cells</p>
+                <p class="text-muted" style="font-size: medium">The explored cells are marked with <u
+                        style="color: #22a6b3">blue</u></p>
+                <button class="button button--primary w-100" style="height: 50px" onclick="showTutorialModal()">Help
+                </button>
             </div>
         </div>
     </div>

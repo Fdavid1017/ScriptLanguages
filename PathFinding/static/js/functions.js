@@ -19,6 +19,7 @@ var infosTemplate = {
 //Start up
 function startUp() {
     createTable(startSize, startSize);
+    showTutorialModal();
     document.getElementById("tableColumnsSize").value = startSize;
     document.getElementById("tableRowsSize").value = startSize;
 }
@@ -152,6 +153,7 @@ function createTable(rows, columns) {
             var td = document.createElement("td");
             //addClass(td, "min50");
             addClass(td, "empty");
+            addClass(td, "cursorPointer");
             td.setAttribute("style", " width: " + size + "%; padding-bottom: " + size + "%;");
 
             td.addEventListener("mouseenter", function (event) {
@@ -181,6 +183,16 @@ function createTable(rows, columns) {
     previousMapSize[1] = columns;
 
     document.getElementById("generatedTablePlace").appendChild(table);
+}
+
+function inputNumberRangeCheck(id, min, max) {
+    const value = $(id).val();
+
+    if (value < min) {
+        $(id).val(min);
+    } else if (value > max) {
+        $(id).val(max);
+    }
 }
 
 function showInfosFrom(x, y) {
@@ -304,6 +316,10 @@ function showModal(text) {
     $('#messageModal').modal('show')
     $('#messageModal').find('.modal-body').text(text);
     $('#messageModal').find('.modal-body').html($('#messageModal').find('.modal-body').html().replace(/\n/g, '<br/>'));
+}
+
+function showTutorialModal() {
+    $('#tutorialModal').modal('show');
 }
 
 function getCookie(name) {
