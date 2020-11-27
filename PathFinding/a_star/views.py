@@ -1,12 +1,14 @@
 import time
-import timeit
 from json import dumps
 
-from django.http import JsonResponse, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import render
 
+from PathFinding.Node import NodeEncoder
+from PathFinding.aStar import mapRouteToList
+
+
 # Create your views here.
-from PathFinding.aStar import calculateRoute, Node, mapRouteToList, NodeEncoder
 
 
 def index(request):
@@ -20,8 +22,7 @@ def index(request):
             if key != "csrfmiddlewaretoken" and key != "diagonalMoves":
                 map.append(request.POST.getlist(key))
 
-
-        result = mapRouteToList(map,request.POST.get("diagonalMoves"))
+        result = mapRouteToList(map, request.POST.get("diagonalMoves"))
         route = result[0]
 
         if route is None:
