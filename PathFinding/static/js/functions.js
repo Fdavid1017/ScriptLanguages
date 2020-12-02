@@ -15,8 +15,6 @@ var infosTemplate = {
     "f": "G cost + H cost"
 }
 
-
-//Start up
 function startUp() {
     createTable(startSize, startSize);
     showTutorialModal();
@@ -29,11 +27,11 @@ function isMouseDown() {
 }
 
 function mouseDown() {
-    ++mouseButtonPos;
+    mouseButtonPos = 1;
 }
 
 function mouseUp() {
-    --mouseButtonPos;
+    mouseButtonPos = 0;
 }
 
 function addClass(element, className) {
